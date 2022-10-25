@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
 
     return (
         <div className='container mx-auto'>
@@ -32,15 +38,16 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user.displayName ?
+                    {user?.email}
+                    {user?.uid ?
                         <>
-                        {user.displayName}
-                        <Link  className="btn">LogOut</Link>
+                            {user?.displayName}
+                            <Link onClick={handleLogOut} className="btn">LogOut</Link>
                         </>
                         :
                         <>
                             <Link to='/login' className="btn">Login</Link>
-                            <Link to='/login' className="btn">Register</Link>
+                            <Link to='/register' className="btn">Register</Link>
                         </>
                     }
                 </div>
@@ -48,7 +55,9 @@ const Header = () => {
                 <div className=" dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img src="https://placeimg.com/80/80/people" />
+                            {
+                                <img src="https://placeimg.com/80/80/people" />
+                            }
                         </div>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
