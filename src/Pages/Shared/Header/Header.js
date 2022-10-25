@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { FaUserAlt } from "react-icons/fa";
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -42,21 +43,24 @@ const Header = () => {
                     {user?.uid ?
                         <>
                             {user?.displayName}
-                            <Link onClick={handleLogOut} className="btn">LogOut</Link>
+                            <Link onClick={handleLogOut} className="btn btn-xs mr-3">LogOut</Link>
                         </>
                         :
                         <>
-                            <Link to='/login' className="btn">Login</Link>
-                            <Link to='/register' className="btn">Register</Link>
+                            <Link to='/login' className="btn btn-xs ">Login</Link>
+                            <Link to='/register' className="btn btn-xs mx-3">Register</Link>
                         </>
                     }
                 </div>
                 {/* avater */}
                 <div className=" dropdown dropdown-end">
-                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
-                            {
-                                <img src="https://placeimg.com/80/80/people" />
+                    <label tabIndex={0} className="btn btn-circle avatar">
+                        <div className="rounded-full">
+                            {user?.photoURL ?
+                                // <img src="https://placeimg.com/80/80/people" />
+                                <img src={user.photoURL} />
+                                :
+                                <FaUserAlt className='w-100%'></FaUserAlt>
                             }
                         </div>
                     </label>
