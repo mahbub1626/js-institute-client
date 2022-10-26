@@ -1,11 +1,15 @@
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
 import { useContext } from 'react';
 import { FaFacebook, FaGithubAlt, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
+
 const LogIn = () => {
-  const { userLogIn } = useContext(AuthContext);
+  const { userLogIn, providerLogIn } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const gitHubProvider = new GithubAuthProvider();
 
 
   const handleSUbmit = event => {
@@ -23,6 +27,24 @@ const LogIn = () => {
         console.log(user);
       })
       .catch(e => console.error(e))
+  }
+
+  const handleGoogleSignIn = () => {
+    providerLogIn(googleProvider)
+    .then(result=> {
+      const user = result.user;
+      console.log(user);
+    })
+    .catch(error=> console.error(error))
+  }
+
+  const handleGitHubSignIn = () => {
+    providerLogIn(gitHubProvider)
+    .then(result=> {
+      const user = result.user;
+      console.log(user);
+    })
+    .catch(error=> console.error(error))
   }
 
   return (
@@ -51,13 +73,13 @@ const LogIn = () => {
       </div>
 
       <div className='mt-3'>
-        <button className="btn gap-2 mb-3 w-full">
+        <button onClick={handleGoogleSignIn} className="btn gap-2 mb-3 w-full">
           <FaGoogle /> SignIn with Google
         </button>
         <button className="btn gap-2 mb-3 w-full">
           <FaFacebook /> SignIn with Facebook
         </button>
-        <button className="btn gap-2 mb-3 w-full">
+        <button onClick={handleGitHubSignIn} className="btn gap-2 mb-3 w-full">
           <FaGithubAlt /> SignIn with GitHub
         </button>
       </div>
