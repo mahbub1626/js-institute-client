@@ -32,8 +32,8 @@ const Header = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/courses'>Courses</Link></li>
+                        <li><Link to='/'>Courses</Link></li>
+                        <li><Link to='/faq'>FAQ</Link></li>
                         <li><Link to='/blog'>Blog</Link></li>
                         <li><Link to='/contact'>Contact</Link></li>
                     </ul>
@@ -72,7 +72,20 @@ const Header = () => {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <div className="navbar-end">
+                            {user?.email}
+                            {user?.uid ?
+                                <>
+                                    {user?.displayName}
+                                   <li><Link onClick={handleLogOut} className="">LogOut</Link></li>
+                                </>
+                                :
+                                <>
+                                    <li> <Link to='/login' className=" ">Login</Link></li>
+                                    <li> <Link to='/register' className="">Register</Link></li>
+                                </>
+                            }
+                        </div>
                     </ul>
                 </div>
             </div>
