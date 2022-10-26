@@ -15,12 +15,16 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Courses></Courses>,
-                loader: ()=> fetch(`http://localhost:5000/categories`)
+                loader: () => {
+                    return fetch('https://js-institute-server.vercel.app/categories')
+                }
             },
             {
                 path: '/courses/:id',
                 element: <Course></Course>,
-                loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({ params }) => {
+                    return fetch(`https://js-institute-server.vercel.app/courses/${params.id}`)
+                }
             },
             {
                 path: '/blog',
