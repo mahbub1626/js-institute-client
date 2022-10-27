@@ -11,6 +11,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     // const user = { displayName: 'Anan' }
     const [user, setUser] = useState(null);
+    console.log(user);
     const [loading, setLoading] = useState(true);
     const [theme, setTheme] = useState("light")
 
@@ -50,7 +51,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log('user changed:', currentUser);
+            // console.log('user changed:', currentUser);
             if (currentUser === null || currentUser.emailVerified) {
                 setUser(currentUser);
             }

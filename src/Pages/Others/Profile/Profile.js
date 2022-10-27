@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Profile = () => {
-    const { user } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     console.log('profile section',user);
    
     return (

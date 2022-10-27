@@ -28,7 +28,7 @@ const Register = () => {
       setError('');
       handleUpdateUserProfile(name, photoURL);
       handleSendEmailVerify();
-      toast.success('Successfully toasted!')
+      toast.success('Please verify you mail!')
   })
   .catch(e => {
       console.error(e)
