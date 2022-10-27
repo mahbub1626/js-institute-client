@@ -38,11 +38,19 @@ const Header = () => {
                         <li><Link to='/contact'>Contact</Link></li>
                     </ul>
                 </div>
+
+                {/* dark/light */}
+                <div className="form-control">
+                    <label className="label cursor-pointer">
+                        {/* <span className="label-text">Remember me</span> */}
+                        <input type="checkbox" className="toggle toggle-primary"  />
+                    </label>
+                </div>
                 <div className="navbar-end">
-                    {user?.email}
+                    {/* {user?.email} */}
                     {user?.uid ?
                         <>
-                            {user?.displayName}
+                            {/* {user?.displayName} */}
                             <Link onClick={handleLogOut} className="btn btn-xs mr-3">LogOut</Link>
                         </>
                         :
@@ -58,7 +66,7 @@ const Header = () => {
                         <div className="rounded-full">
                             {user?.photoURL ?
                                 // <img src="https://placeimg.com/80/80/people" />
-                                <img src={user.photoURL} />
+                                <img src={user.photoURL} alt="" />
                                 :
                                 <FaUserAlt className='w-100%'></FaUserAlt>
                             }
@@ -66,18 +74,18 @@ const Header = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
-                            <a className="justify-between">
+                            <Link to="/profile" className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
+                            </Link>
                         </li>
                         <li><a>Settings</a></li>
                         <div className="navbar-end">
-                            {user?.email}
+                            {/* {user?.email} */}
                             {user?.uid ?
                                 <>
-                                    {user?.displayName}
-                                   <li><Link onClick={handleLogOut} className="">LogOut</Link></li>
+                                    {/* {user?.displayName} */}
+                                    <li><Link onClick={handleLogOut} className="">LogOut</Link></li>
                                 </>
                                 :
                                 <>

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, sendEmailVerify } = useContext(AuthContext);
+  const [error, setError] = useState('');
 
 
   const handleSUbmit = event => {
@@ -19,12 +21,19 @@ const Register = () => {
     console.log(name, photoURL, email, password);
 
     createUser(email, password)
-      .then(result => {
-        const user = result.user;
-        console.log(user)
-        handleUpdateUserProfile(name, photoURL)
-      })
-      .catch(e => console.error(e))
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+      form.reset();
+      setError('');
+      handleUpdateUserProfile(name, photoURL);
+      handleSendEmailVerify();
+      toast.success('Successfully toasted!')
+  })
+  .catch(e => {
+      console.error(e)
+      setError(e.message);
+  })
   }
 
   const handleUpdateUserProfile = (name, photoURL) => {
@@ -37,6 +46,12 @@ const Register = () => {
       .catch(e => console.error(e))
 
   }
+
+  const handleSendEmailVerify = () => {
+    sendEmailVerify()
+    .then(()=>{})
+    .catch(e => console.error(e))
+}
 
   return (
     <div className='w-80 mt-10 p-4 bg-yellow-300 mx-auto rounded-md'>
@@ -69,6 +84,9 @@ const Register = () => {
 
       <div>
         <small className='text-center '>Already have an account? <Link to='/login'>Login</Link></small>
+      </div>
+      <div>
+        <p>{error}</p>
       </div>
     </div>
   );

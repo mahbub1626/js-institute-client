@@ -1,16 +1,19 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { FaDownload, FaDownloadAlt } from 'react-icons/fa';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Course = () => {
     const courses = useLoaderData();
-    console.log(courses)
+    // console.log(courses)
     const { _id, title, details, img, rating } = courses;
 
     return (
 
         <div className='mt-4'>
 
-
+            <div className='bg-lime-50 p-4'>
+                <p>Dowload: <FaDownload className='' /></p>
+            </div>
             <div className="card bg-base-100 shadow-xl mt-4">
                 <figure><img className='w-full' src={img} alt="img" /></figure>
                 <div className="card-body">
@@ -41,9 +44,10 @@ const Course = () => {
                             <p>{rating.badge}</p>
                         </div>
                         <div>
-                            <button className="btn btn-primary">Buy Now</button>
+                            <Link to='/premium' className="btn btn-primary">Get premium access.</Link>
 
-                        </div>                    </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

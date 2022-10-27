@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const LeftCourseList = () => {
+const RightCourseList = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const LeftCourseList = () => {
     );
 };
 
-export default LeftCourseList;
+export default RightCourseList;

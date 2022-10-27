@@ -1,15 +1,24 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { FaFacebook, FaGithubAlt, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
 const LogIn = () => {
-  const { userLogIn, providerLogIn } = useContext(AuthContext);
+  const { userLogIn, providerLogIn, setLoading } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
+
+
+
+  const [error, setError] = useState('')
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
+  const navigate = useNavigate();
 
 
   const handleSUbmit = event => {
@@ -22,29 +31,43 @@ const LogIn = () => {
     console.log(email, password);
 
     userLogIn(email, password)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+      form.reset()
+      if(user.emailVerified){
+          navigate(from, {replace: true})
+      }else{
+          alert('Your mail is not varifyed, please verify.')
+      }
+      
+  })
+  .catch(e => {
+      console.error(e)
+      setError(e.message)
+  })
+  .finally(()=>{
+      setLoading(false);
+  })
+
+}
+
+  const handleGoogleSignIn = () => {
+    providerLogIn(googleProvider)
       .then(result => {
         const user = result.user;
         console.log(user);
       })
-      .catch(e => console.error(e))
-  }
-
-  const handleGoogleSignIn = () => {
-    providerLogIn(googleProvider)
-    .then(result=> {
-      const user = result.user;
-      console.log(user);
-    })
-    .catch(error=> console.error(error))
+      .catch(error => console.error(error))
   }
 
   const handleGitHubSignIn = () => {
     providerLogIn(gitHubProvider)
-    .then(result=> {
-      const user = result.user;
-      console.log(user);
-    })
-    .catch(error=> console.error(error))
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => console.error(error))
   }
 
   return (
@@ -83,7 +106,9 @@ const LogIn = () => {
           <FaGithubAlt /> SignIn with GitHub
         </button>
       </div>
-
+      <div>
+        <p>{error}</p>
+      </div>
     </div>
   );
 };

@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course }) => {
-    console.log(course)
-    const {_id, title, course_fee, img } = course;
+    // console.log(course)
+    const {_id, title, course_fee, img, total_student } = course;
 
     return (
 
@@ -15,7 +15,11 @@ const CourseCard = ({ course }) => {
                     <h2 className="card-title">{title}</h2>
                     <p>It's high time to learn {title}.</p>
                     <div className="card-actions justify-between">
-                        <button className="">{course_fee}</button>
+                        <div>
+                        <p className="">{course_fee}</p>
+                        <p className="">Enroll: {total_student}</p>
+
+                        </div>
                         <Link to={`/courses/${_id}`} className='btn'>Details</Link>
                     </div>
                 </div>
