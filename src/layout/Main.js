@@ -5,10 +5,10 @@ import LeftCourseList from '../Pages/Shared/LeftCourseList/LeftCourseList';
 
 const Main = () => {
     return (
-        <div className='container mx-auto px-8'>
+        <div className='container mx-auto lg:px-8'>
             <Header></Header>
-            <div className='grid grid-cols-3 gap-4'>
-                <div className='bg-pink-50 p-5'>
+            <div className='grid grid-cols-3 gap-4 mt-4'>
+                <div className='bg-lime-50 lg:p-4 rounded-md'>
                     <LeftCourseList></LeftCourseList>
                 </div>
                 <div className='col-span-2'>

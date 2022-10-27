@@ -16,7 +16,7 @@ export const routes = createBrowserRouter([
                 path: '/',
                 element: <Courses></Courses>,
                 loader: () => {
-                    return fetch('https://js-institute-server.vercel.app/categories')
+                    return fetch('https://js-institute-server.vercel.app/courses')
                 }
             },
             {
